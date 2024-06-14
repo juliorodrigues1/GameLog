@@ -1,0 +1,6 @@
+services:
+  api:
+      build: .
+      container_name: log-api
+      ports:
+        - "8080:8080"
