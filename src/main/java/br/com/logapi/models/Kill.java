@@ -9,6 +9,11 @@ public class Kill {
 
     public Kill() {
     }
+    public Kill(String killer, String victim, String weapon) {
+        this.killer = killer;
+        this.victim = victim;
+        this.weapon = weapon;
+    }
 
     private Game game;
 

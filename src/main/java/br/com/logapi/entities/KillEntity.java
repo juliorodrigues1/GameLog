@@ -2,7 +2,6 @@ package br.com.logapi.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 
 @Entity
 @Table(name = "kills")
@@ -28,4 +27,24 @@ public class KillEntity {
     }
 
     public KillEntity() {}
+
+    public long getId() {
+        return id;
+    }
+
+    public String getKiller() {
+        return killer;
+    }
+
+    public String getVictim() {
+        return victim;
+    }
+
+    public String getWeapon() {
+        return weapon;
+    }
+
+    public GameEntity getGame() {
+        return game;
+    }
 }
