@@ -1,11 +1,13 @@
 package br.com.logapi.services;
 
 import br.com.logapi.entities.GameEntity;
+import br.com.logapi.models.Game;
 import br.com.logapi.models.GameReportDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -36,6 +38,12 @@ class LogParseTest {
     @InjectMocks
     private LogParse logParse;
 
+    @Captor
+    private ArgumentCaptor<GameEntity> gameEntityCaptor;
+
+    @Captor
+    private ArgumentCaptor<Game> gameCaptor;
+
     @Test
     @DisplayName("should parse log and save games correctly")
     public void shouldParseLogAndSaveGames() throws IOException {
@@ -60,9 +68,10 @@ class LogParseTest {
         Page<GameReportDTO> result = logParse.parseLog(logFile);
 
         // Verifica se os métodos save foram chamados com os argumentos corretos
-        ArgumentCaptor<GameEntity> gameEntityCaptor = ArgumentCaptor.forClass(GameEntity.class);
         verify(gameService, times(2)).save(gameEntityCaptor.capture());
         List<GameEntity> savedGameEntities = gameEntityCaptor.getAllValues();
+        verify(killService, times(1)).save(gameCaptor.capture(), gameEntityCaptor.capture());
+
 
         // Verifica as propriedades dos GameEntity salvos
         assertEquals(2, savedGameEntities.size());
