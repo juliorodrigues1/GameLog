@@ -34,10 +34,6 @@ public class LogParse {
             "(\\d{1,2}:\\d{2}) ShutdownGame:"
     );
 
-    private static final Pattern INIT_PATTERN = Pattern.compile(
-            "(\\d{1,2}:\\d{2}) InitGame:"
-    );
-
     public Page<GameReportDTO> parseLog(File logFile) throws IOException {
         List<Game> games = new ArrayList<>();
         Game currentGame = null;
@@ -46,7 +42,6 @@ public class LogParse {
         for (String line : lines) {
             Matcher killMatcher = KILL_PATTERN.matcher(line);
             Matcher shutdownMatcher = SHUTDOWN_PATTERN.matcher(line);
-            Matcher initMatcher = INIT_PATTERN.matcher(line);
 
             if (shutdownMatcher.find()) {
                 if (currentGame != null) {
