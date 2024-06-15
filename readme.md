@@ -18,3 +18,8 @@ A GameLog API é uma aplicação para gerenciar e processar logs de jogos. Ela p
 ## Para rodar os teste execulte:
     mvn test
 
+## Para acessar swagger:
+    http://localhost:8080/swagger-ui/index.html
+
+## Para acessar banco H2:
+    http://localhost:8080/h2-console
